@@ -1,11 +1,11 @@
 library(ggplot2)
 library(dplyr)
+library(stringr)
 
-
-# import dar]ta
+# import data
 full_trains <- read.csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-02-26/full_trains.csv")
 
-# Visualisation 1
+# visualisation 1
 full_trains %>%
   filter(!is.na("service")) %>%
   ggplot(aes(x=journey_time_avg, alpha = 0.3)) +
@@ -25,3 +25,9 @@ ggplot() +
        title= "Histogram of Average Journey Time for Trains on the SNCF Network",
        subtitle = "National Service trains highlighted in red") +
   guides(fill = FALSE)
+
+# visualisation 3
+paris_stations <- full %>% 
+  filter(str_detect(departure_station, "PARIS")) %>%
+  filter(year)
+
